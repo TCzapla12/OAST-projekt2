@@ -11,14 +11,14 @@ option display_precision 8;
 printf '\n==============================\n';
 printf 'Reading model ...\n\n';
 
-model 'dap_lp.mod';
+model 'dap_ddap.mod';
 
 ### Reading data
 
 printf '\n==============================\n';
 printf 'Reading data ...\n\n';
 
-data 'net4.dat';
+data 'net12.dat';
 
 #display Nodes;
 
@@ -33,7 +33,7 @@ data 'net4.dat';
 printf '\n==============================\n';
 printf 'Solving the problem ...\n\n';
 
-solve dap_lp;
+solve dap;
 
 display demandPath_flow;
 display z;
@@ -41,4 +41,13 @@ display z;
 printf '\n==============================\n';
 printf 'Solving completed.\n\n';
 
+printf '\n==============================\n';
+printf 'Solving the problem ...\n\n';
 
+solve ddap;
+
+display demandPath_flow;
+display minLinksCost;
+
+printf '\n==============================\n';
+printf 'Solving completed.\n\n';

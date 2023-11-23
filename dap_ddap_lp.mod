@@ -21,21 +21,37 @@ var demandPath_flow { d in Demands, 1..demand_maxPath[d]}, >= 0; # flow x_dp
 
 var z; # link overload
 
+var number_of_linksModules { Links }, >= 0; # y_e
+
 subject to demand_satisfaction_constraint { d in Demands }:
   sum { dp in 1..demand_maxPath[ d] } demandPath_flow[ d, dp ] = demand_volume[ d ];
   
-subject to capacity_constraint { l in Links }:
+subject to capacity_constraint_dap { l in Links }:
   number_of_modules[ l ] * module_capacity + z >= sum { d in Demands, dp in 1..demand_maxPath[ d ]: sum{ k in Demand_pathLinks[ d, dp ]: k = l } 1 > 0 } demandPath_flow[ d, dp ];
  
+subject to capacity_constraint_ddap { l in Links }:
+  number_of_linksModules[ l ] * module_capacity >= sum { d in Demands, dp in 1..demand_maxPath[ d ]: sum{ k in Demand_pathLinks[ d, dp ]: k = l } 1 > 0 } demandPath_flow[ d, dp ];
+
 minimize maxLinkOverload:
   z;
 
-
+minimize minLinksCost:
+   sum { l in Links } module_cost[ l ] * number_of_linksModules[ l ];
+   
+   
+   
 problem dap_lp:
   maxLinkOverload,
    
   demandPath_flow, z,  
-  demand_satisfaction_constraint, capacity_constraint
+  demand_satisfaction_constraint, capacity_constraint_dap
+;
+
+problem ddap_lp:
+  minLinksCost,
+  
+  demandPath_flow, number_of_linksModules,
+  demand_satisfaction_constraint, capacity_constraint_ddap
 ;
 	
-
+	
