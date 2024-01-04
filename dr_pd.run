@@ -32,6 +32,14 @@ data 'net12.dat';
 
 #display SituationLinks;
 
+for {i in Situations} {
+    for {j in SituationLinks[i]} {
+        let Alpha[j,i] := 1
+    }
+}
+
+display Alpha;
+
 ### Solving problem
 
 printf '\n==============================\n';

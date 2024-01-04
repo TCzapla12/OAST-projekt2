@@ -18,13 +18,18 @@ param demand_volume { Demands }, >= 0, default 0; # h(d) = h(d,0) -> czy h(d,s) 
 
 param demand_maxPath { Demands }, >= 0, default 0; # number of available paths for each demand
 set Demand_pathLinks { d in Demands, dp in 1..demand_maxPath[d] } within Links; # paths as sets of links
-set SituationLinks { s in Situations } within Links; # alpha - link(e,s) availability coefficient
+set SituationLinks { s in Situations } within Links; # alpha(e,s) - link availability coefficient
+
+param Alpha {l in Links, s in Situations}, >= 0, default 0;
 
 var demandPath_flow { d in Demands, 1..demand_maxPath[d]}, >= 0, integer; # flow x_dp
 
 var number_of_linksModules { Links }, >= 0, integer; # y_e
 
-subject to demand_satisfaction_constraint { d in Demands }:
+subject to demand_satisfaction_constraint { d in Demands, s in Situations }:
+  sum { dp in 1..demand_maxPath[ d] } demandPath_flow[ d, dp ]                     >= demand_volume[ d ];
+
+subject to demand_satisfaction_constraint_ddap { d in Demands }:
   sum { dp in 1..demand_maxPath[ d] } demandPath_flow[ d, dp ] = demand_volume[ d ];
 
 subject to capacity_constraint_ddap { l in Links }:
@@ -36,5 +41,5 @@ minimize minLinksCost:
 problem drpd:
   minLinksCost,
   demandPath_flow, number_of_linksModules,
-  demand_satisfaction_constraint, capacity_constraint_ddap
+  demand_satisfaction_constraint_ddap, capacity_constraint_ddap
 ;
