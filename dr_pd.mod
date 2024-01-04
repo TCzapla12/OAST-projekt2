@@ -1,7 +1,9 @@
 param maxNode, >= 0, integer;
 param module_capacity, >=0, integer;
+param failureSituations, >= 0, integer;
 
 set Nodes=1..maxNode;
+set Situations=1..failureSituations;
 
 set Links;
 param link_nodeA { Links }, in Nodes;
@@ -12,10 +14,11 @@ param module_cost { Links } default 1;
 param number_of_modules { Links }, >= 0, default 1000; # number of modules c(e)
 
 set Demands;
-param demand_volume { Demands }, >= 0, default 0; # h(d)
+param demand_volume { Demands }, >= 0, default 0; # h(d) = h(d,0) -> czy h(d,s) nas interesuje? - chcemy 100% restoration
 
 param demand_maxPath { Demands }, >= 0, default 0; # number of available paths for each demand
 set Demand_pathLinks { d in Demands, dp in 1..demand_maxPath[d] } within Links; # paths as sets of links
+set SituationLinks { s in Situations } within Links; # alpha - link(e,s) availability coefficient
 
 var demandPath_flow { d in Demands, 1..demand_maxPath[d]}, >= 0, integer; # flow x_dp
 

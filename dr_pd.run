@@ -22,11 +22,15 @@ data 'net12.dat';
 
 #display Nodes;
 
+#display Situations;
+
 #display Links, link_nodeA, link_nodeZ;
 
 #display Demands, demand_maxPath, demand_volume;
 
 #display Demand_pathLinks;
+
+#display SituationLinks;
 
 ### Solving problem
 
