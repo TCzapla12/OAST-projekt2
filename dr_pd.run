@@ -32,6 +32,8 @@ data 'net12.dat';
 
 #display SituationLinks;
 
+let {l in Links, s in Situations} Alpha[l,s] := 0;
+
 for {i in Situations} {
     for {j in SituationLinks[i]} {
         let Alpha[j,i] := 1
@@ -39,6 +41,8 @@ for {i in Situations} {
 }
 
 display Alpha;
+
+display Theta;
 
 ### Solving problem
 

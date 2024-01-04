@@ -21,6 +21,7 @@ set Demand_pathLinks { d in Demands, dp in 1..demand_maxPath[d] } within Links; 
 set SituationLinks { s in Situations } within Links; # alpha(e,s) - link availability coefficient
 
 param Alpha {l in Links, s in Situations}, >= 0, default 0;
+param Theta {d in Demands, dp in 1..demand_maxPath[d], s in Situations}, >= 0, default 0;
 
 var demandPath_flow { d in Demands, 1..demand_maxPath[d]}, >= 0, integer; # flow x_dp
 
