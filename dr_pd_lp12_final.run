@@ -18,7 +18,7 @@ model 'dr_pd_lp.mod';
 printf '\n==============================\n';
 printf 'Reading data ...\n\n';
 
-data 'net12corrected20.dat';
+data 'net12_final.dat';
 
 #display Nodes;
 

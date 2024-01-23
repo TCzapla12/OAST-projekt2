@@ -1,5 +1,5 @@
 param maxNode := 12;
-param module_capacity := 20;
+param module_capacity := 1;
 param failureSituations := 19;
 
 param: Links: link_nodeA link_nodeZ number_of_modules module_cost:=
@@ -426,7 +426,7 @@ set Demand_pathLinks[ 64, 5 ] := 16 17 15 14 ;
 
 set Demand_pathLinks[ 65, 1 ] := 16 17 ;
 set Demand_pathLinks[ 65, 2 ] := 6 3 4 17 ;
-set Demand_pathLinks[ 65, 3 ] := 16 4 5 14 15 ;
+set Demand_pathLinks[ 65, 3 ] := 6 3 5 14 15 ;
 
 set Demand_pathLinks[ 66, 1 ] := 14 15 ;
 set Demand_pathLinks[ 66, 2 ] := 5 4 17 ;

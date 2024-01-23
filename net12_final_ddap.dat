@@ -1,6 +1,5 @@
 param maxNode := 12;
 param module_capacity := 1;
-param failureSituations := 19;
 
 param: Links: link_nodeA link_nodeZ number_of_modules module_cost:=
 1 1 11 0 1
@@ -426,30 +425,10 @@ set Demand_pathLinks[ 64, 5 ] := 16 17 15 14 ;
 
 set Demand_pathLinks[ 65, 1 ] := 16 17 ;
 set Demand_pathLinks[ 65, 2 ] := 6 3 4 17 ;
-set Demand_pathLinks[ 65, 3 ] := 16 4 5 14 15 ;
+set Demand_pathLinks[ 65, 3 ] := 6 3 5 14 15 ;
 
 set Demand_pathLinks[ 66, 1 ] := 14 15 ;
 set Demand_pathLinks[ 66, 2 ] := 5 4 17 ;
 set Demand_pathLinks[ 66, 3 ] := 14 8 9 ;
 set Demand_pathLinks[ 66, 4 ] := 11 7 9 ;
 set Demand_pathLinks[ 66, 5 ] := 11 7 8 15 ;
-
-set SituationLinks[1] := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[2] := 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[3] := 1 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[4] := 1 2 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[5] := 1 2 3 5 6 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[6] := 1 2 3 4 6 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[7] := 1 2 3 4 5 7 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[8] := 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[9] := 1 2 3 4 5 6 7 9 10 11 12 13 14 15 16 17 18;
-set SituationLinks[10] := 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18;
-set SituationLinks[11] := 1 2 3 4 5 6 7 8 9 11 12 13 14 15 16 17 18;
-set SituationLinks[12] := 1 2 3 4 5 6 7 8 9 10 12 13 14 15 16 17 18;
-set SituationLinks[13] := 1 2 3 4 5 6 7 8 9 10 11 13 14 15 16 17 18;
-set SituationLinks[14] := 1 2 3 4 5 6 7 8 9 10 11 12 14 15 16 17 18;
-set SituationLinks[15] := 1 2 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18;
-set SituationLinks[16] := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 17 18;
-set SituationLinks[17] := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 17 18;
-set SituationLinks[18] := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 18;
-set SituationLinks[19] := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17;

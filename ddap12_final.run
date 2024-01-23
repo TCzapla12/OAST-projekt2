@@ -18,7 +18,7 @@ model 'dap_ddap.mod';
 printf '\n==============================\n';
 printf 'Reading data ...\n\n';
 
-data 'net12corrected20_ddap.dat';
+data 'net12_final_ddap.dat';
 
 #display Nodes;
 
