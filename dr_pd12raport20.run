@@ -1,0 +1,79 @@
+option solver '..\..\Ampl\cplex.exe';
+
+option presolve_eps 0.00001;
+
+### Setting controls
+
+option display_precision 8;
+
+### Reading model
+
+printf '\n==============================\n';
+printf 'Reading model ...\n\n';
+
+model 'dr_pd.mod';
+
+### Reading data
+
+printf '\n==============================\n';
+printf 'Reading data ...\n\n';
+
+data 'net12raport20.dat';
+
+#display Nodes;
+
+#display Situations;
+
+#display Links, link_nodeA, link_nodeZ;
+
+#display Demands, demand_maxPath, demand_volume;
+
+#display Demand_pathLinks;
+
+#display SituationLinks;
+
+param Alpha{l in Links, s in Situations};
+let {l in Links, s in Situations} Alpha[l,s] := 0;
+
+
+for {s in Situations} {
+	for {l in SituationLinks[s]} {
+		let Alpha[l,s] := 1;
+	}
+}
+
+#display Alpha;
+
+let {d in Demands, dp in 1..demand_maxPath[d], s in Situations} Theta[d,dp,s] := 1;
+
+for {l in Links} {
+	for { s in Situations} {
+		if Alpha[l,s] = 0 then
+			for { d in Demands} {
+				for { dp in 1..demand_maxPath[d]} {
+					for { k in Demand_pathLinks[d,dp]} {
+						if k = l then
+							let Theta[d,dp,s] := 0;
+								}
+						
+							
+					}
+				}
+			}
+		}
+	
+
+#display Theta;
+
+### Solving problem
+
+printf '\n==============================\n';
+printf 'Solving the problem ...\n\n';
+
+solve drpd;
+
+display demandPath_flow;
+display minLinksCost;
+
+printf '\n==============================\n';
+printf 'Solving completed.\n\n';

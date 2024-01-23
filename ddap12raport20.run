@@ -1,0 +1,42 @@
+option solver '..\..\Ampl\cplex.exe';
+
+option presolve_eps 0.00001;
+
+### Setting controls
+
+option display_precision 8;
+
+### Reading model
+
+printf '\n==============================\n';
+printf 'Reading model ...\n\n';
+
+model 'dap_ddap.mod';
+
+### Reading data
+
+printf '\n==============================\n';
+printf 'Reading data ...\n\n';
+
+data 'net12raport20_ddap.dat';
+
+#display Nodes;
+
+#display Links, link_nodeA, link_nodeZ;
+
+#display Demands, demand_maxPath, demand_volume;
+
+#display Demand_pathLinks;
+
+### Solving problem
+
+printf '\n==============================\n';
+printf 'Solving the problem ...\n\n';
+
+solve ddap;
+
+display demandPath_flow;
+display minLinksCost;
+
+printf '\n==============================\n';
+printf 'Solving completed.\n\n';
