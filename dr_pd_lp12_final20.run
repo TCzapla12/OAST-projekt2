@@ -72,7 +72,13 @@ printf 'Solving the problem ...\n\n';
 
 solve drpd;
 
+param LinkCapacity{l in Links};
+for {l in Links} {
+	let LinkCapacity[l] := number_of_linksModules[l] * module_capacity
+	}
+
 display demandPath_flow;
+display LinkCapacity;
 display minLinksCost;
 
 printf '\n==============================\n';
