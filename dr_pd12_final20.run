@@ -72,13 +72,18 @@ printf 'Solving the problem ...\n\n';
 
 solve drpd;
 
-param LinkCapacity{l in Links};
+param linkCapacity{l in Links};
 for {l in Links} {
-	let LinkCapacity[l] := number_of_linksModules[l] * module_capacity
+	let linkCapacity[l] := number_of_linksModules[l] * module_capacity
 	}
 
-display demandPath_flow;
-display LinkCapacity;
+param linkLoad{l in Links};
+for {l in Links} {
+	let linkLoad[l] := sum { d in Demands, dp in 1..demand_maxPath[ d ]: sum{ k in Demand_pathLinks[ d, dp ]: k = l } 1 > 0 } demandPath_flow[ d, dp ];
+	}
+
+display linkCapacity;
+display linkLoad;
 display minLinksCost;
 
 printf '\n==============================\n';
